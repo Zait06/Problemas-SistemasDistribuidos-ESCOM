@@ -3,9 +3,16 @@
 
 class Temperatura{
     private:
-        int tempKelvin;     // Temperatura en grados Kelvin
+        const double ctk=273.15;
+        double tempKelvin;     // Temperatura en grados Kelvin
     public:
-        Temperatura(int=0);
+        Temperatura(double=273.15);
+        void setTempKelvin(double tk);
+        void setTempFahrenheit(double tf);
+        void setTempCelsius(double tc);
+        void getTempKelvin();
+        void getTempFahrenheit();
+        void getTempCelsius();
 };
 
 #endif
