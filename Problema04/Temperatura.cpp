@@ -2,6 +2,8 @@
 #include <iostream>
 using namespace std;
 
+const double CTK=273.15;
+
 Temperatura::Temperatura(double tk){
     tempKelvin=tk;
 }
@@ -11,11 +13,11 @@ void Temperatura::setTempKelvin(double tk){
 }
 
 void Temperatura::setTempFahrenheit(double tf){
-    tempKelvin=((tf-32)*5.0/9.0)+ctk;
+    tempKelvin=((tf-32)*5.0/9.0)+CTK;
 }
 
 void Temperatura::setTempCelsius(double tc){
-    tempKelvin=tc+ctk;
+    tempKelvin=tc+CTK;
 }
 
 void Temperatura::getTempKelvin(){
@@ -23,9 +25,9 @@ void Temperatura::getTempKelvin(){
 }
 
 void Temperatura::getTempFahrenheit(){
-    cout<<"Temperatura en grados Fahrenheit: "<<((tempKelvin-ctk)*9.0/5.0)+32<<" °F"<<endl;
+    cout<<"Temperatura en grados Fahrenheit: "<<((tempKelvin-CTK)*9.0/5.0)+32<<" °F"<<endl;
 }
 
 void Temperatura::getTempCelsius(){
-    cout<<"Temperatura en grados Celsius: "<<tempKelvin-ctk<<" °C"<<endl;
+    cout<<"Temperatura en grados Celsius: "<<tempKelvin-CTK<<" °C"<<endl;
 }

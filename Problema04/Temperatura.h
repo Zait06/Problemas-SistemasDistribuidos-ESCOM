@@ -3,7 +3,6 @@
 
 class Temperatura{
     private:
-        const double ctk=273.15;
         double tempKelvin;     // Temperatura en grados Kelvin
     public:
         Temperatura(double=273.15);
