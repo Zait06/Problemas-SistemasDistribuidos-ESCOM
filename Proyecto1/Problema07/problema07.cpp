@@ -10,7 +10,7 @@ int main(int argc, char *argv[]){
         exit(0);
 	}
     int n=strtol(argv[1],NULL,10);
-    int j,k,raiz;
+    int j,h,raiz;
     vector<Numero> numeros;             // Vector de objetos Numero
     vector<Numero>::iterator i;         // Iterador del vector
 
@@ -18,18 +18,14 @@ int main(int argc, char *argv[]){
     for(j=0; j<=n; j++)                 // Se crean un vector de numeros
         numeros[j]=Numero(true,j);
 
-    raiz=(int)(sqrt(n));
-
-    for(i=numeros.begin()+2;i<=(numeros.begin()+raiz)+1;i++){
-        Numero aux=*i;
-        if(!aux.getPrimo()==false){
-            for(k=aux.getSoloNumero()+2;k<=(n/aux.getSoloNumero())+1;k++){
-                numeros[k].setPrimo(false);
-            }
+    for(j=2;j*j<=n;j++) {
+        if(numeros[j].getPrimo()){
+            for(h=2;j*h<=n;h++)
+                numeros[j*h].setPrimo(false);
         }
     }
 
-    for(i=numeros.begin();i<numeros.begin()+n+1;i++){
+    for(i=numeros.begin();i<=numeros.begin()+n;i++){
         Numero aux=*i;
         aux.getNumero();
     }
