@@ -28,7 +28,7 @@ int main()
     ast.ordenaAngulo();
     //ast.imprimeVertices();
 
-    gfx_open(800, 600, "Ejemplo Micro Animacion GFX");
+    gfx_open(800, 600, "Astoriodes HLAZ");
     gfx_color(0,200,100);
     int ox=0,oy=0;
     int aux=rand()%5;
