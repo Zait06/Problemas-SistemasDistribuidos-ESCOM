@@ -17,32 +17,38 @@ int main(int argc, char* argv[]){
     srand(time(NULL)); 
     int numAste=atoi(argv[1]);              // Numero de asteroides
     int t,i,j,k,AzarA,vert=30;              // Variables auxiliares
-    int tam[]={10,20,50,100,150};           // Tamaño del asteroide
+    double tam[]={10,20,25,30,50,60};           // Tamaño del asteroide
     double cx=0.0,cy=0.0;                   // Variable auxiliar par dibuar las lineas
     vector<PoligonoIrreg> asteroides;       // Almacenamiento de los asteroides
     asteroides.reserve(numAste);            // Reserva de asteroides
-    int posix[numAste];                     // Posición inicial del asteroide
-    float veloX[numAste],veloY[numAste];    // Velocidades en el eje X y Y
+    double posiX[numAste],posiY[numAste];                     // Posición inicial del asteroide
+    double veloX[numAste],veloY[numAste];    // Velocidades en el eje X y Y
     
     i=0;
     while(i<numAste){                       // Creación de los asteroides
         PoligonoIrreg ast(vert);            // Creación de un objeto PoligonoIrregular
-        AzarA=rand()%4;                     // Numero al azar entre 0 y 4
-        veloX[i]=100/tam[AzarA];            // Calculo de la velocidad (Inverso a su tamaño)
+        AzarA=rand()%5;                     // Numero al azar entre 0 y 4
+        veloX[i]=30/tam[AzarA];            // Calculo de la velocidad (Inverso a su tamaño)
         if(rand()%2)                        // Decisión para saber si la velocidad será creciente o 
             veloX[i]=(-1)*veloX[i];         // decreciente
 
-        posix[i]=rand()%600;                // Ubicación del asteroide en un rango de 0 a 600
-        if(veloX[i]<0)                      // Si la velocidad es negativa, entonces empezará en un 
-            posix[i]=800-posix[i];          // sitio positivo el asteroide
+        posiX[i]=rand()%800;                // Ubicación del asteroide en un rango de 0 a 600
+        posiY[i]=rand()%800;                // Ubicación del asteroide en un rango de 0 a 600
+        if(veloX[i]<0){                      // Si la velocidad es negativa, entonces empezará en un 
+            posiX[i]=800-posiX[i];          // sitio positivo el asteroide
+            posiY[i]=800-posiY[i];          // sitio positivo el asteroide
+        }
 
-        switch(rand()%3){                   // Tres casos para desplazar el asteroide
+        switch(rand()%4){                   // Tres casos para desplazar el asteroide
             case 1:
                 veloY[i]=veloX[i];
                 veloX[i]=0;
             break;
             case 2:
                 veloY[i]=0;
+            break;
+            case 3:
+                veloY[i]=(-1)*veloX[i];
             break;
             default:
                 veloY[i]=veloX[i];
@@ -78,13 +84,16 @@ int main(int argc, char* argv[]){
             for(i=1;i<vert;i++){
                 ox=asteroides[j].obtenerXdeCoordenada(i);
                 oy=asteroides[j].obtenerYdeCoordenada(i);
-                gfx_line(cx+t*veloX[j]+posix[j],cy+t*veloY[j]+posix[j],
-                         ox+t*veloX[j]+posix[j],oy+t*veloY[j]+posix[j]);
+                gfx_line(cx+t*veloX[j]+posiX[j],
+                         cy+t*veloY[j]+posiY[j],
+                         ox+t*veloX[j]+posiX[j],
+                         oy+t*veloY[j]+posiY[j]);
                 cx=ox; cy=oy;
             }
-            gfx_line(cx+t*veloX[j]+posix[j],cy+t*veloY[j]+posix[j],
-                    asteroides[j].obtenerXdeCoordenada(0)+t*veloX[j]+posix[j],
-                    asteroides[j].obtenerYdeCoordenada(0)+t*veloY[j]+posix[j]);
+            gfx_line(cx+t*veloX[j]+posiX[j],
+                     cy+t*veloY[j]+posiY[j],
+                     asteroides[j].obtenerXdeCoordenada(0)+t*veloX[j]+posiX[j],
+                     asteroides[j].obtenerYdeCoordenada(0)+t*veloY[j]+posiY[j]);
         }
         
         // gfx_line(100,500-t*5,300,600-t*5);
