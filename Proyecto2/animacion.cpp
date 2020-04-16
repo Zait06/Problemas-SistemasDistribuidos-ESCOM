@@ -16,17 +16,16 @@ int main(int argc, char* argv[]){
 
     srand(time(NULL)); 
     int numAste=atoi(argv[1]);              // Numero de asteroides
-    int t,i,j,vert=30;              // Variables auxiliares
+    int t,i,j,vert=35;                      // Variables auxiliares
     double cx=0.0,cy=0.0;                   // Variable auxiliar par dibuar las lineas
-    vector<Asteroide> asteroides;       // Almacenamiento de los asteroides
+    vector<Asteroide> asteroides;           // Almacenamiento de los asteroides
     asteroides.reserve(numAste);            // Reserva de asteroides
     
     i=0;
-    while(i<numAste){                       // Creación de los asteroides
-        Asteroide ast(vert,rand()%5);            // Creación de un objeto PoligonoIrregular
-        ast.iniciarAsteroide(rand()%4);
-        ast.ordenaAngulo();
-        asteroides[i]=ast;
+    while(i<numAste){                               // Creación de los asteroides
+        Asteroide ast(vert,rand()%5);               // Creación de un objeto Asteroide con 25 vertices
+        ast.iniciarAsteroide(rand()%2,rand()%4);    // Iniciar el resto de los valores
+        asteroides[i]=ast;                          // Se agrega al vector los asteroides
         i++;
     }
 
@@ -37,6 +36,13 @@ int main(int argc, char* argv[]){
     for(t = 0; t < 200; t++){
         gfx_clear();
 
+        /*
+            En esta parte, se recorren todos los asteroides, para poder 
+            verlos en pantalla, cada uno tiene una velocidad en X, Y y una
+            posición inicial, para que cuanto t, se esté desplazando, este se 
+            mueva con todas las lineas. Esto porque se trató de hacer una figua
+            cerrada para poder simular un asteroide.
+        */
         for(j=0;j<numAste;j++){
             cx=asteroides[j].obtenerXdeCoordenada(0);
             cy=asteroides[j].obtenerYdeCoordenada(0);
@@ -55,13 +61,8 @@ int main(int argc, char* argv[]){
                      asteroides[j].obtenerYdeCoordenada(0)+t*asteroides[j].obtenerVeloY()+asteroides[j].obtenerPosiY());
         }
         
-        // gfx_line(100,500-t*5,300,600-t*5);
-        // gfx_line(100-t*2,500,300-t*2,600);
-        // gfx_line( t+posix[0][0], t+posix[0][1], t+posix[0][2], t+posix[0][3] );
-        // gfx_line(t*5+80, t*3+40, t*3+40, t*5+80);
         gfx_flush();
-        //usleep(52083); //24 por segundo
-        usleep(42000);
+        usleep(52000);
     }
     return 0;
 }
