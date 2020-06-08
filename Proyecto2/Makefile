@@ -1,5 +1,5 @@
-animacion: gfx.o Asteroide.o Coordenada.o animacion.o
-	g++ gfx.o Asteroide.o Coordenada.o animacion.o -o animacion -lX11
+animacion: gfx.o Asteroide.o Coordenada.o main.o
+	g++ gfx.o Asteroide.o Coordenada.o main.o -o main -lX11
 animacion.o: animacion.cpp gfx.h
 	g++ animacion.cpp -c
 Asteroide.o: Asteroide.cpp Coordenada.o Asteroide.h
